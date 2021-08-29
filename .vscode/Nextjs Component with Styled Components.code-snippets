@@ -1,0 +1,27 @@
+{
+  "Nextjs Component with Styled Component": {
+    "prefix": "nextcompo",
+    "body": [
+      "import React from \"react\";",
+      "import styled from \"styled-components\";",
+      "import palette from \"../../style/palette\";",
+      "import Link from \"next/link\";",
+      "",
+      "const Container = styled.div`",
+      "  ",
+      "`;",
+      "",
+      "const ${TM_FILENAME_BASE}: React.FC = () => {",
+      "  return (",
+      "    <Container>",
+      "      ${TM_FILENAME_BASE}",
+      "    </Container>",
+      "  );",
+      "};",
+      "",
+      "export default ${TM_FILENAME_BASE};",
+      ""
+    ],
+    "description": ""
+  }
+}

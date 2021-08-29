@@ -6,14 +6,15 @@ const globalStyle = css`
   ${reset};
   * {
     box-sizing: border-box;
+    border-collapse: collapse;
   }
   body {
     font-family: Noto Sans, Noto Sans KR;
-    color: ${palette.black};
+    color: "black";
   }
   a {
     text-decoration: none;
-    color: ${palette.black};
+    color: "black";
   }
 `;
 
