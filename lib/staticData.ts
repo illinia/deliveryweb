@@ -12,3 +12,6 @@ export const monthList = [
   "11월",
   "12월",
 ];
+
+export const dayList = Array.from({ length: 31 }, (_, i) => String(i + 1));
+export const yearList = Array.from({ length: 121 }, (_, i) => String(2021 - i));

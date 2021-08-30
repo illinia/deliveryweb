@@ -4,18 +4,20 @@ import palette from "../../style/palette";
 import Link from "next/link";
 
 interface StyledButtonProps {
-  login?: boolean;
+  signin?: boolean;
+  radius?: string;
 }
 
 const Container = styled.button<StyledButtonProps>`
-  width: 100px;
+  width: 100%;
   height: 100%;
   padding: 0 16px;
-  border: 2px solid ${palette.buttonBorderColor};
+  border: none;
   color: white;
   font-size: 16px;
+  font-weight: 800;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.18);
-  border-radius: 21px;
+  border-radius: ${({ radius }) => (radius ? +radius : 4)}px;
   background-color: ${palette.headerBackground};
   cursor: pointer;
   outline: none;
@@ -26,22 +28,28 @@ const Container = styled.button<StyledButtonProps>`
   &:hover {
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.12);
   }
-  ${({ login }) =>
-    login &&
+  ${({ signin }) =>
+    signin &&
     css`
-      border: none;
+      border: 2px solid ${palette.buttonBorderColor};
     `}
 `;
 
 interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  login?: boolean;
-  onClick?: () => void | {};
+  signin?: boolean;
+  radius?: string;
+  onClick?: () => void | any;
 }
 
 const Button: React.FC<IProps> = ({ ...props }) => {
   return (
-    <Container onClick={props.onClick} login={props.login}>
+    <Container
+      {...props}
+      onClick={props.onClick}
+      radius={props.radius}
+      signin={props.signin}
+    >
       {props.children}
     </Container>
   );

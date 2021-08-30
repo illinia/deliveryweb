@@ -17,8 +17,10 @@ const LoginButton: React.FC = () => {
 
   return (
     <Container>
-      <Button login>로그인</Button>
-      <Button onClick={openModal}>회원가입</Button>
+      <Button radius="21">로그인</Button>
+      <Button radius="21" signin onClick={openModal}>
+        회원가입
+      </Button>
       <ModalPortal>
         <SignUpModal closeModal={closeModal} />
       </ModalPortal>
