@@ -28,7 +28,6 @@ class MyDocument extends Document {
         styles: (
           <>
             {initialProps.styles}
-
             {sheet.getStyleElement()}
           </>
         ),

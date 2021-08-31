@@ -39,20 +39,14 @@ interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   signin?: boolean;
   radius?: string;
-  onClick?: () => void | any;
 }
 
-const Button: React.FC<IProps> = ({ ...props }) => {
+const Button: React.FC<IProps> = ({ children, radius, signin, ...props }) => {
   return (
-    <Container
-      {...props}
-      onClick={props.onClick}
-      radius={props.radius}
-      signin={props.signin}
-    >
-      {props.children}
+    <Container {...props} radius={radius} signin={signin}>
+      {children}
     </Container>
   );
 };
 
-export default Button;
+export default React.memo(Button);

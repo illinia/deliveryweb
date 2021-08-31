@@ -31,6 +31,10 @@ const HeaderLogo = styled.div`
   align-items: center;
   font-weight: 600;
   font-size: 24px;
+
+  & + div {
+    position: relative;
+  }
 `;
 
 const Header: React.FC = () => {

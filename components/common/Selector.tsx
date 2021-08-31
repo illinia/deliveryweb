@@ -1,9 +1,9 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import palette from "../../style/palette";
-import { IoIosArrowDown } from "react-icons/io";
+import { useSelector } from "../../store";
 
-const Container = styled.div`
+const Container = styled.div<{ isValid: boolean; validateMode: boolean }>`
   width: 100%;
   height: 46px;
 
@@ -21,6 +21,18 @@ const Container = styled.div`
     background-repeat: no-repeat;
     font-size: 16px;
 
+    ${({ validateMode, isValid }) => {
+      if (validateMode) {
+        if (!isValid) {
+          return css`
+            border-color: ${palette.selectorWarningBackground};
+            background-color: ${palette.selectorWarningBackground};
+          `;
+        }
+      }
+      return undefined;
+    }}
+
     &:focus {
       border-color: ${palette.selectorFocused};
     }
@@ -31,15 +43,19 @@ interface IProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   options?: string[];
   disabledOptions?: string[];
   value?: string;
+  isValid?: boolean;
 }
 
 const Selector: React.FC<IProps> = ({
   options = [],
   disabledOptions = [],
+  isValid,
   ...props
 }) => {
+  const validateMode = useSelector((state) => state.common.validateMode);
+
   return (
-    <Container>
+    <Container isValid={!!isValid} validateMode={validateMode}>
       <select {...props}>
         {disabledOptions.map((option, index) => (
           <option key={index} value={option} disabled>
