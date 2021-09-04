@@ -43,7 +43,12 @@ interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button: React.FC<IProps> = ({ children, radius, signin, ...props }) => {
   return (
-    <Container {...props} radius={radius} signin={signin}>
+    <Container
+      className="button-container"
+      {...props}
+      radius={radius}
+      signin={signin}
+    >
       {children}
     </Container>
   );

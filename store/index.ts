@@ -7,11 +7,13 @@ import {
 import user from "./user";
 import common from "./common";
 import auth from "./auth";
+import shop from "./shop";
 
 const rootReducer = combineReducers({
   user: user.reducer,
   common: common.reducer,
   auth: auth.reducer,
+  shop: shop.reducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -86,6 +86,7 @@ const Input: React.FC<IProps> = ({
       iconExist={!!icon}
       isValid={isValid}
       useValidation={validateMode && useValidation}
+      className="input-container"
     >
       <input {...props} />
       <div className="input-icon-wrapper">{icon}</div>
@@ -96,4 +97,4 @@ const Input: React.FC<IProps> = ({
   );
 };
 
-export default Input;
+export default React.memo(Input);

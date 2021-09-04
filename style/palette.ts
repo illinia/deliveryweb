@@ -11,6 +11,7 @@ export default {
   inputFocused: "#ff385c",
   inputErrorMessage: "#ff5a5f",
   inputErrorBackground: "#fff8f6",
+  inputListBackground: "#ebebeb",
   selectorBackground: "white",
   selectorBorder: "#ebebeb",
   selectorFocused: "#ff385c",
