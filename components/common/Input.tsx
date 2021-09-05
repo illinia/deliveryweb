@@ -70,6 +70,8 @@ interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   isValid?: boolean;
   useValidation?: boolean;
   errorMessage?: string;
+  value?: string | number;
+  onChange?: (e: any) => void;
 }
 
 const Input: React.FC<IProps> = ({
@@ -77,6 +79,8 @@ const Input: React.FC<IProps> = ({
   isValid = false,
   useValidation = true,
   errorMessage,
+  value,
+  onChange,
   ...props
 }) => {
   const validateMode = useSelector((state) => state.common.validateMode);
@@ -88,7 +92,7 @@ const Input: React.FC<IProps> = ({
       useValidation={validateMode && useValidation}
       className="input-container"
     >
-      <input {...props} />
+      <input {...props} onChange={onChange} value={value} />
       <div className="input-icon-wrapper">{icon}</div>
       {useValidation && validateMode && !isValid && errorMessage && (
         <p className="input-error-message">{errorMessage}</p>

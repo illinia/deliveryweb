@@ -1,10 +1,14 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import styled from "styled-components";
 import palette from "../../style/palette";
 import Link from "next/link";
 import Input from "../common/Input";
 import Selector from "../common/Selector";
 import Button from "../common/Button";
+import { useSelector } from "../../store";
+import { shopActions } from "../../store/shop";
+import { useDispatch } from "react-redux";
+import RegisterShopFooter from "./RegisterShopFooter";
 
 const Container = styled.div`
   width: 100vw;
@@ -25,7 +29,7 @@ const DetailContainer = styled.div`
   flex-direction: column;
 `;
 
-const DetailList = styled.div`
+const DetailList = styled.div<{ validateMode?: boolean }>`
   width: 100%;
   min-height: 60px;
   display: flex;
@@ -37,6 +41,7 @@ const DetailList = styled.div`
     width: 80%;
     display: flex;
     flex-direction: row;
+    align-items: center;
 
     div + div {
       margin-left: 10px;
@@ -55,9 +60,11 @@ const DetailList = styled.div`
   }
   .shop-register-input-number {
     width: 25%;
+    height: ${({ validateMode }) => (validateMode ? "80px" : "inherit")};
+    margin-top: ${({ validateMode }) => (validateMode ? "10px" : "0")};
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
   }
   .shop-register-address {
     width: 80%;
@@ -71,11 +78,12 @@ const DetailList = styled.div`
   .shop-register-postcode {
     display: flex;
     flex-direction: row;
-    height: 46px;
+    align-items: center;
+    min-height: 46px;
 
     .button-container {
       width: 100px;
-      height: 100%;
+      height: 40px;
       margin-left: 10px;
     }
   }
@@ -87,11 +95,57 @@ const DetailList = styled.div`
 `;
 
 const RegisterShop: React.FC = () => {
-  const [packingCheck, setPackingCheck] = useState<boolean>(false);
+  const shopName = useSelector((state) => state.shop.name);
+  const shopNumber1 = useSelector((state) => state.shop.number1);
+  const shopNumber2 = useSelector((state) => state.shop.number2);
+  const shopNumber3 = useSelector((state) => state.shop.number3);
+  const shopSort = useSelector((state) => state.shop.shopSort);
+  const deliveryOption = useSelector((state) => state.shop.deliveryOption);
 
-  const onPackingCheck = useCallback((val: boolean) => {
-    setPackingCheck(val);
-  }, []);
+  const dispatch = useDispatch();
+  const validateMode = useSelector((state) => state.common.validateMode);
+
+  const [packingCheck, setPackingCheck] = useState<string>("배달");
+  const [number1, setNumber1] = useState<string>("");
+  const [number2, setNumber2] = useState<string>("");
+  const [number3, setNumber3] = useState<string>("");
+
+  const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(shopActions.setNameType(event.target.value));
+  };
+
+  const onChangeNumber1 = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    if (!isFinite(+event.target.value)) {
+      return;
+    } else {
+      setNumber1(event.target.value);
+      dispatch(shopActions.setNumber1Type(event.target.value));
+    }
+  };
+
+  const onChangeNumber2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(shopActions.setNumber2Type(event.target.value));
+  };
+
+  const onChangeNumber3 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(shopActions.setNumber1Type(event.target.value));
+  };
+
+  const onChangeSort = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(shopActions.setShopSortType(event.target.value));
+  };
+
+  const onChangedeliveryOption = (value: string) => {
+    setPackingCheck(value);
+    dispatch(shopActions.setDeliveryOption(value));
+  };
+
+  const isValid = useMemo(() => {
+    if (!shopNumber1 || !shopSort || !deliveryOption) {
+      return false;
+    }
+    return true;
+  }, [shopNumber1, shopSort, deliveryOption]);
 
   return (
     <Container>
@@ -99,45 +153,51 @@ const RegisterShop: React.FC = () => {
       <DetailContainer>
         <DetailList>
           <span className="shop-register-input-category">가게 이름</span>
-          <Input type="text" />
+          <Input
+            type="text"
+            value={shopName || undefined}
+            onChange={onChangeName}
+          />
         </DetailList>
-        <DetailList>
+        <DetailList validateMode={validateMode}>
           <span className="shop-register-input-category">가게 전화번호</span>
           <div className="shop-register-input-div">
             <div className="shop-register-input-number">
-              <Selector options={["010", "011", "017"]} defaultValue="010" />
+              <Selector
+                isValid={!!shopNumber1}
+                options={["010", "011", "017"]}
+                defaultValue="번호 앞자리"
+                value={number1 || undefined}
+                disabledOptions={["번호 앞자리"]}
+                onChange={onChangeNumber1}
+              />
             </div>
             <div className="shop-register-input-number">
-              <Input type="text" />
+              <Input
+                type="text"
+                value={number2 || undefined}
+                onChange={onChangeNumber2}
+              />
             </div>
             <div className="shop-register-input-number">
-              <Input type="text" />
+              <Input
+                type="text"
+                value={number3 || undefined}
+                onChange={onChangeNumber3}
+              />
             </div>
           </div>
         </DetailList>
-        <DetailList>
-          <span className="shop-register-input-category">가게 주소</span>
-          <div className="shop-register-address">
-            <div className="shop-register-postcode">
-              <div className="shop-register-input-number">
-                <Input type="text" />
-              </div>
-              <Button>현재 위치</Button>
-            </div>
-            <div className="shop-register-input-div">
-              <Input type="text" />
-            </div>
-            <div className="shop-register-input-div">
-              <Input type="text" />
-            </div>
-          </div>
-        </DetailList>
-        <DetailList>
+        <DetailList validateMode={validateMode}>
           <span className="shop-register-input-category">업종 카테고리</span>
           <div className="shop-register-input-number">
             <Selector
+              isValid={!!shopSort}
+              value={shopSort || undefined}
+              defaultValue="하나를 선택해주세요"
+              disabledOptions={["하나를 선택해주세요"]}
               options={["치킨", "피자", "버거", "스시"]}
-              defaultValue="치킨"
+              onChange={onChangeSort}
             />
           </div>
         </DetailList>
@@ -147,21 +207,28 @@ const RegisterShop: React.FC = () => {
             <label>
               <input
                 type="radio"
-                checked={!packingCheck}
-                onChange={() => onPackingCheck(false)}
+                value={deliveryOption || undefined}
+                checked={packingCheck == "배달"}
+                onChange={() => onChangedeliveryOption("배달")}
               />
               <span>배달만 가능</span>
             </label>
             <label>
               <input
                 type="radio"
-                checked={packingCheck}
-                onChange={() => onPackingCheck(true)}
+                value={deliveryOption || undefined}
+                checked={packingCheck == "포장"}
+                onChange={() => onChangedeliveryOption("포장")}
               />
               <span>배달 + 포장 가능</span>
             </label>
           </div>
         </DetailList>
+        <RegisterShopFooter
+          isValid={isValid}
+          prevHref="/"
+          nextHref="/shop/location"
+        />
       </DetailContainer>
     </Container>
   );

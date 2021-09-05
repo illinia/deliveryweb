@@ -146,7 +146,7 @@ const LoginModal: React.FC<IProps> = ({ closeModal }) => {
         </Button>
       </div>
       <p>
-        이미 Delivery 계정이 있나요?
+        Delivery 계정이 없나요?
         <span
           className="login-modal-set-signup"
           role="presentation"

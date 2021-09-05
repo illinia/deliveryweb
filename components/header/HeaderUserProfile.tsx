@@ -13,7 +13,7 @@ import { useSelector } from "../../store";
 import { logoutAPI } from "../../lib/api/auth";
 import { userActions } from "../../store/user";
 
-const UserProfile = styled.button<{ onClick: (e: Event) => void }>`
+const UserProfile = styled.div<{ onClick: (e: Event) => void }>`
   display: flex;
   align-items: center;
   height: 40px;
@@ -33,6 +33,10 @@ const UserProfile = styled.button<{ onClick: (e: Event) => void }>`
     width: 30px;
     height: 30px;
     border-radius: 50%;
+  }
+
+  svg {
+    color: black;
   }
 `;
 
