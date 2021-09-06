@@ -128,7 +128,7 @@ const RegisterShop: React.FC = () => {
   };
 
   const onChangeNumber3 = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(shopActions.setNumber1Type(event.target.value));
+    dispatch(shopActions.setNumber3Type(event.target.value));
   };
 
   const onChangeSort = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -140,12 +140,32 @@ const RegisterShop: React.FC = () => {
     dispatch(shopActions.setDeliveryOption(value));
   };
 
+  const OnlyNumber = () => {
+    const regexp = /[^0-9]/;
+    if (
+      !regexp.test(shopNumber1!) &&
+      !regexp.test(shopNumber2!) &&
+      !regexp.test(shopNumber3!)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const isValid = useMemo(() => {
-    if (!shopNumber1 || !shopSort || !deliveryOption) {
+    if (!shopNumber1 || !shopSort || !deliveryOption || !OnlyNumber()) {
       return false;
     }
     return true;
-  }, [shopNumber1, shopSort, deliveryOption]);
+  }, [
+    shopName,
+    shopNumber1,
+    shopNumber2,
+    shopNumber3,
+    shopSort,
+    deliveryOption,
+  ]);
 
   return (
     <Container>
@@ -157,6 +177,7 @@ const RegisterShop: React.FC = () => {
             type="text"
             value={shopName || undefined}
             onChange={onChangeName}
+            errorMessage="필수 입력사항입니다."
           />
         </DetailList>
         <DetailList validateMode={validateMode}>
@@ -175,15 +196,19 @@ const RegisterShop: React.FC = () => {
             <div className="shop-register-input-number">
               <Input
                 type="text"
+                maxLength={4}
                 value={number2 || undefined}
                 onChange={onChangeNumber2}
+                errorMessage="숫자 4자리"
               />
             </div>
             <div className="shop-register-input-number">
               <Input
                 type="text"
+                maxLength={4}
                 value={number3 || undefined}
                 onChange={onChangeNumber3}
+                errorMessage="숫자 4자리"
               />
             </div>
           </div>

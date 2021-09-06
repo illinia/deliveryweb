@@ -12,12 +12,12 @@ type ShopState = {
   longitude: number;
   shopSort: string | null;
   deliveryOption: string | null;
-  shopPicture: string | null;
+  photos: string[];
 };
 
 const initialState: ShopState = {
   name: null,
-  number1: null,
+  number1: "010",
   number2: null,
   number3: null,
   postcode: null,
@@ -25,9 +25,14 @@ const initialState: ShopState = {
   streetAddress: null,
   latitude: 0,
   longitude: 0,
-  shopSort: null,
+  shopSort: "치킨",
   deliveryOption: "배달",
-  shopPicture: null,
+  photos: [
+    "https://deliveryweb-bucket.s3.ap-northeast-2.amazonaws.com/Unknown__8521f4f9-2b92-42b0-b241-f7caf3bd77dd.jpg",
+    "https://deliveryweb-bucket.s3.ap-northeast-2.amazonaws.com/Unknown__8521f4f9-2b92-42b0-b241-f7caf3bd77dd.jpg",
+    "https://deliveryweb-bucket.s3.ap-northeast-2.amazonaws.com/Unknown__8521f4f9-2b92-42b0-b241-f7caf3bd77dd.jpg",
+    "https://deliveryweb-bucket.s3.ap-northeast-2.amazonaws.com/Unknown__8521f4f9-2b92-42b0-b241-f7caf3bd77dd.jpg",
+  ],
 };
 
 const shop = createSlice({
@@ -77,6 +82,9 @@ const shop = createSlice({
     setLongitude(state, action: PayloadAction<number>) {
       state.longitude = action.payload;
       return state;
+    },
+    setPhotos(state, action: PayloadAction<string[]>) {
+      state.photos = action.payload;
     },
   },
 });

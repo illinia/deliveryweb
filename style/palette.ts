@@ -15,6 +15,7 @@ export default {
   inputErrorMessage: "#ff5a5f",
   inputErrorBackground: "#fff8f6",
   inputListBackground: "#ebebeb",
+  photoUploadBorder: "#bbb",
   selectorBackground: "white",
   selectorBorder: "#ebebeb",
   selectorDisabled: "#f7f7f7",
