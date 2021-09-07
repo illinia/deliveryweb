@@ -224,7 +224,10 @@ const RegisterShopPhotoCardList: React.FC<IProps> = ({ photos }) => {
           추가하기
         </div>
       </li>
-      <RegisterShopFooter prevHref="/shop/geometry" nextHref="" />
+      <RegisterShopFooter
+        prevHref="/shop/geometry"
+        nextHref="/shop/description"
+      />
     </Container>
   );
 };

@@ -249,12 +249,12 @@ const RegisterShop: React.FC = () => {
             </label>
           </div>
         </DetailList>
-        <RegisterShopFooter
-          isValid={isValid}
-          prevHref="/"
-          nextHref="/shop/location"
-        />
       </DetailContainer>
+      <RegisterShopFooter
+        isValid={isValid}
+        prevHref="/"
+        nextHref="/shop/location"
+      />
     </Container>
   );
 };

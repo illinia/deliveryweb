@@ -36,7 +36,6 @@ const DetailList = styled.div<{ validateMode?: boolean }>`
   display: flex;
   align-items: center;
   padding: 0 10px;
-  border-bottom: 1px solid ${palette.inputBorder};
 
   .shop-register-input-div {
     width: 80%;
@@ -183,12 +182,12 @@ const RegisterShopLocation: React.FC = () => {
             </div>
           </div>
         </DetailList>
-        <RegisterShopFooter
-          isValid={isValid}
-          prevHref="/shop/register"
-          nextHref="/shop/geometry"
-        />
       </DetailContainer>
+      <RegisterShopFooter
+        isValid={isValid}
+        prevHref="/shop/register"
+        nextHref="/shop/geometry"
+      />
     </Container>
   );
 };

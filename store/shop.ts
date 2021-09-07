@@ -13,6 +13,7 @@ type ShopState = {
   shopSort: string | null;
   deliveryOption: string | null;
   photos: string[];
+  description: string | null;
 };
 
 const initialState: ShopState = {
@@ -27,12 +28,8 @@ const initialState: ShopState = {
   longitude: 0,
   shopSort: "치킨",
   deliveryOption: "배달",
-  photos: [
-    "https://deliveryweb-bucket.s3.ap-northeast-2.amazonaws.com/Unknown__8521f4f9-2b92-42b0-b241-f7caf3bd77dd.jpg",
-    "https://deliveryweb-bucket.s3.ap-northeast-2.amazonaws.com/Unknown__8521f4f9-2b92-42b0-b241-f7caf3bd77dd.jpg",
-    "https://deliveryweb-bucket.s3.ap-northeast-2.amazonaws.com/Unknown__8521f4f9-2b92-42b0-b241-f7caf3bd77dd.jpg",
-    "https://deliveryweb-bucket.s3.ap-northeast-2.amazonaws.com/Unknown__8521f4f9-2b92-42b0-b241-f7caf3bd77dd.jpg",
-  ],
+  photos: [],
+  description: null,
 };
 
 const shop = createSlice({
@@ -85,6 +82,9 @@ const shop = createSlice({
     },
     setPhotos(state, action: PayloadAction<string[]>) {
       state.photos = action.payload;
+    },
+    setDescription(state, action: PayloadAction<string>) {
+      state.description = action.payload;
     },
   },
 });

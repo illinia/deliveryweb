@@ -108,7 +108,7 @@ const RegisterShopGeometry: React.FC = () => {
 
   return (
     <Container>
-      <h2>핀이 놓인 위치가 정확한가요?</h2>
+      <h2>핀이 놓인 위치가 정확한가요?(선택)</h2>
       <h3>필요한 경우 핀이 정확한 위치에 자리하도록 조정할 수 있어요.</h3>
       <div className="register-shop-geometry-map-wrapper">
         <div ref={mapRef} id="map" />

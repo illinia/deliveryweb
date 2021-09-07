@@ -1,14 +1,5 @@
-import { UserType } from "./user";
-
-export type UserState = UserType & {
-  isLogged: boolean;
-};
-
-export type CommonState = {
-  validateMode: boolean;
-};
-
-type ShopState = {
+export type StoredShopType = {
+  id: number;
   name: string | null;
   number1: string | null;
   number2: string | null;
@@ -22,4 +13,7 @@ type ShopState = {
   deliveryOption: string | null;
   photos: string[];
   description: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+  ownerId: number;
 };
