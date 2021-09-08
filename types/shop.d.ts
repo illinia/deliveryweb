@@ -17,3 +17,15 @@ export type StoredShopType = {
   updatedAt: Date;
   ownerId: number;
 };
+
+export const SHOPCATEGORIES = [
+  "치킨",
+  "피자",
+  "버거",
+  "중국집",
+  "한식",
+  "일식/돈까스",
+  "족발/보쌈",
+  "야식",
+  "분식",
+];

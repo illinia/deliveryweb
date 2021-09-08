@@ -9,6 +9,7 @@ import { useSelector } from "../../store";
 import { shopActions } from "../../store/shop";
 import { useDispatch } from "react-redux";
 import RegisterShopFooter from "./RegisterShopFooter";
+import { SHOPCATEGORIES } from "../../types/shop";
 
 const Container = styled.div`
   width: 100vw;
@@ -221,7 +222,7 @@ const RegisterShop: React.FC = () => {
               value={shopSort || undefined}
               defaultValue="하나를 선택해주세요"
               disabledOptions={["하나를 선택해주세요"]}
-              options={["치킨", "피자", "버거", "스시"]}
+              options={SHOPCATEGORIES}
               onChange={onChangeSort}
             />
           </div>
