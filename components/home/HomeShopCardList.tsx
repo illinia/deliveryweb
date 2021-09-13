@@ -7,6 +7,7 @@ import ShopCard from "../common/ShopCard";
 
 const Container = styled.div`
   width: 100%;
+  max-width: 1400px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -16,8 +17,14 @@ const Container = styled.div`
 const HomeShopCardList: React.FC = () => {
   return (
     <Container>
-      {SHOPCATEGORIES.map((card) => {
-        return <ShopCard card={card} />;
+      {SHOPCATEGORIES.map((card, index) => {
+        return (
+          <Link href={`/shoplist?sort=${card}`}>
+            <a>
+              <ShopCard card={card} key={index} />
+            </a>
+          </Link>
+        );
       })}
     </Container>
   );

@@ -10,11 +10,11 @@ const globalStyle = css`
   }
   body {
     font-family: Noto Sans, Noto Sans KR;
-    color: "black";
+    color: black;
   }
   a {
     text-decoration: none;
-    color: "black";
+    color: black;
   }
 `;
 

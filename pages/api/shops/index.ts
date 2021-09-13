@@ -24,7 +24,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         createdAt: new Date(),
         updatedAt: new Date(),
       };
-      Data.shop.write([newShop]);
+      Data.shop.write([...shops, newShop]);
       res.statusCode = 201;
       return res.end();
     } catch (e: any) {

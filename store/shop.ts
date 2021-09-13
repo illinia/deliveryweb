@@ -36,6 +36,10 @@ const shop = createSlice({
   name: "shop",
   initialState,
   reducers: {
+    initShop(state) {
+      state = initialState;
+      return state;
+    },
     setNameType(state, action: PayloadAction<string>) {
       state.name = action.payload;
       return state;

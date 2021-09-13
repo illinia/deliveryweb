@@ -65,4 +65,4 @@ const LoginButton: React.FC = () => {
   );
 };
 
-export default LoginButton;
+export default React.memo(LoginButton);

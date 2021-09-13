@@ -8,12 +8,14 @@ import user from "./user";
 import common from "./common";
 import auth from "./auth";
 import shop from "./shop";
+import shops from "./shops";
 
 const rootReducer = combineReducers({
   user: user.reducer,
   common: common.reducer,
   auth: auth.reducer,
   shop: shop.reducer,
+  shops: shops.reducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

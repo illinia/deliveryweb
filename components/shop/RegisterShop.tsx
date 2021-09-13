@@ -9,7 +9,7 @@ import { useSelector } from "../../store";
 import { shopActions } from "../../store/shop";
 import { useDispatch } from "react-redux";
 import RegisterShopFooter from "./RegisterShopFooter";
-import { SHOPCATEGORIES } from "../../types/shop";
+import { SHOPCATEGORIES } from "../../types/shop.d";
 
 const Container = styled.div`
   width: 100vw;

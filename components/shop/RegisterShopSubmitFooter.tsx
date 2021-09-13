@@ -7,6 +7,8 @@ import Button from "../common/Button";
 import { useRouter } from "next/dist/client/router";
 import { registerShopAPI } from "../../lib/api/shop";
 import { useSelector } from "../../store";
+import { useDispatch } from "react-redux";
+import { shopActions } from "../../store/shop";
 
 const Container = styled.footer`
   position: fixed;
@@ -39,6 +41,7 @@ const Container = styled.footer`
 const RegisterShopSubmitFooter: React.FC = () => {
   const userId = useSelector((state) => state.user.id);
   const registerShop = useSelector((state) => state.shop);
+  const dispatch = useDispatch();
 
   const router = useRouter();
 
@@ -49,6 +52,7 @@ const RegisterShopSubmitFooter: React.FC = () => {
     };
     try {
       await registerShopAPI(registerShopBody);
+      dispatch(shopActions.initShop());
       router.push("/");
     } catch (e) {
       console.log(e);

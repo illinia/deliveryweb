@@ -7,6 +7,8 @@ interface StyledButtonProps {
   signin?: boolean;
   radius?: string;
   color?: string;
+  fontColor?: string;
+  fontWeight?: string;
 }
 
 const Container = styled.button<StyledButtonProps>`
@@ -17,11 +19,11 @@ const Container = styled.button<StyledButtonProps>`
   align-items: center;
   padding: 0 16px;
   border: none;
-  color: white;
+  color: ${({ fontColor }) => fontColor};
   font-size: 16px;
-  font-weight: 800;
+  font-weight: ${({ fontWeight }) => fontWeight};
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.18);
-  border-radius: ${({ radius }) => (radius ? +radius : 4)}px;
+  border-radius: ${({ radius }) => (radius ? radius : "4px")};
   background-color: ${({ color }) =>
     color ? color : palette.headerBackground};
   cursor: pointer;
@@ -44,20 +46,24 @@ const Container = styled.button<StyledButtonProps>`
 `;
 
 interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   signin?: boolean;
   radius?: string;
   color?: string;
+  fontColor?: string;
+  fontWeight?: string;
   icon?: JSX.Element;
   onClick?: (e: any) => any;
 }
 
 const Button: React.FC<IProps> = ({
-  children,
+  children = "",
   color,
   radius,
   signin,
   icon,
+  fontColor = "white",
+  fontWeight = "800",
   ...props
 }) => {
   return (
@@ -65,6 +71,8 @@ const Button: React.FC<IProps> = ({
       className="button-container"
       {...props}
       color={color}
+      fontColor={fontColor}
+      fontWeight={fontWeight}
       radius={radius}
       signin={signin}
     >

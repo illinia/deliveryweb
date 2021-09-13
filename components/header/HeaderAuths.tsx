@@ -1,7 +1,4 @@
 import React from "react";
-import styled from "styled-components";
-import palette from "../../style/palette";
-import Link from "next/link";
 import Button from "../common/Button";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
@@ -15,8 +12,9 @@ const HeaderAuths: React.FC = () => {
   return (
     <>
       <Button
-        radius="21"
-        onClick={() => {
+        radius="21px"
+        onClick={(e) => {
+          e.preventDefault();
           dispatch(authActions.setAuthMode("login"));
           openModal();
         }}
@@ -24,9 +22,10 @@ const HeaderAuths: React.FC = () => {
         로그인
       </Button>
       <Button
-        radius="21"
+        radius="21px"
         signin
-        onClick={() => {
+        onClick={(e) => {
+          e.preventDefault();
           dispatch(authActions.setAuthMode("signup"));
           openModal();
         }}
@@ -34,10 +33,10 @@ const HeaderAuths: React.FC = () => {
         회원가입
       </Button>
       <ModalPortal>
-        <AuthModal closeModal={closeModal} />
+        <AuthModal closeModal={(e) => closeModal(e)} />
       </ModalPortal>
     </>
   );
 };
 
-export default HeaderAuths;
+export default React.memo(HeaderAuths);

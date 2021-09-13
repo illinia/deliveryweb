@@ -23,3 +23,7 @@ type ShopState = {
   photos: string[];
   description: string | null;
 };
+
+export type ShopListState = {
+  shops: ShopType[];
+};

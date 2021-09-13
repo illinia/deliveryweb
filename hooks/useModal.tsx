@@ -28,7 +28,8 @@ const useModal = () => {
     setModalOpened(true);
   };
 
-  const closeModal = () => {
+  const closeModal = (e: MouseEvent) => {
+    e.preventDefault();
     setModalOpened(false);
   };
 
@@ -54,7 +55,7 @@ const useModal = () => {
           <div
             className="modal-background"
             role="presentation"
-            onClick={closeModal}
+            onClick={(e) => closeModal(e)}
           />
           {children}
         </Container>,
