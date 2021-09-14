@@ -26,4 +26,5 @@ type ShopState = {
 
 export type ShopListState = {
   shops: ShopType[];
+  detail: ShopType | null;
 };

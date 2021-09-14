@@ -48,7 +48,7 @@ const RegisterShopSubmitFooter: React.FC = () => {
   const onClickregisterShop = async () => {
     const registerShopBody = {
       ...registerShop,
-      hostId: userId,
+      ownerId: userId,
     };
     try {
       await registerShopAPI(registerShopBody);

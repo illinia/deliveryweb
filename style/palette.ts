@@ -33,6 +33,7 @@ export default {
   shopBorderBottom: "#ebebeb",
   sortButtonBackground: "white",
   sortButtonFontColor: "black",
+  subtitle: "#717171",
   textareaBorder: "#ebebeb",
   textareaPlaceholder: "#767676",
   textareaFocused: "#ff385c",
